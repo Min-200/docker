@@ -108,3 +108,7 @@ docker run --name test3 -it --volumes-from test1  myimage  /bin/bash
  
 
 说明：有个卷，容器之间的数据共享比较方便，但也有很多问题需要解决，如权限控制、数据的备份、卷的删除等。这些内容后续文章介绍。
+
+docker 内开启防火墙功能
+docker run -ti --privileged=true sshd:2 /bin/bash
+
