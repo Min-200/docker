@@ -1,0 +1,34 @@
+１.Docker客户端远程访问服务端
+      需要在配置文件/etc/systemd/system/multi-user.target.wants/docker.service中
+      在ExecStart 后面追加　-H　tcp://0.0.0.0
+      eg:　ExecStart=/usr/bin/dockerd -H fd://  -H tcp://0.0.0.0
+      然后重启服务
+      访问时命令为  docker -H 192.168.1.20 images
+      
+      
+2.swarm　根据标签来部署docker容器
+       (1)为node添加一个标签
+          docker node update --label-add env=prod swarm-worker2(添加)
+          docker node update --label-rm=env slave2(删除)
+
+       (2)设置service运行在指定的label的node上
+          docker service create \
+                --constraint node.labels.env==test \
+                --replicas 3 \
+                --name my_web \
+                --8080:80 \
+                httpd
+           
+          docker service update --constraint-rm node.labels.env==prod my_web
+          docker service update --constraint-add node.labels.env==prod my_web
+         
+       如果要在docker-compose.yml中使用标签限制,如下
+        version: "3"
+        services:
+            web:
+                image: shiminde/ubuntu:part2
+              deploy:
+                placement:
+                  constraints: [ node.labels.env == test]
+        
+ 
