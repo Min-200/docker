@@ -1,0 +1,3 @@
+构建镜像 docker build -t sonar:1 .
+如果出现容器中无法访问数据库，请关闭防火墙后重启docker
+
