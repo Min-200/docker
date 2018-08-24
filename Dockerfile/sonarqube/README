@@ -1,3 +1,23 @@
 构建镜像 docker build -t sonar:1 .
 如果出现容器中无法访问数据库，请关闭防火墙后重启docker
 
+mysql安装
+
+wget http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+rpm -ivh mysql-community-release-el6-5.noarch.rpm
+yum install mysql-server
+
+
+
+mysql 设置
+
+1./etc/my.cnf
+[mysqld]
+character-set-server=utf8
+
+2.建库
+CREATE DATABASE sonar;
+CREATE USER 'sonar' IDENTIFIED BY 'sonar';
+GRANT ALL ON sonar.* TO 'sonar'@'%' IDENTIFIED BY 'sonar';
+GRANT ALL ON sonar.* TO 'sonar'@'localhost' IDENTIFIED BY 'sonar';
+FLUSH PRIVILEGES;
