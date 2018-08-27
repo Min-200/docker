@@ -32,3 +32,7 @@
                   constraints: [ node.labels.env == test]
         
  
+3.docker登陆私服出现getsockopt: connection refused
+      centos:7： 在OPTIONS选项后加上 --insecure-registry=IP地址
+                  vim /etc/sysconfig/docker
+                      OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=IP地址'
