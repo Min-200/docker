@@ -155,3 +155,11 @@ docker run --name test3 -it --volumes-from test1  myimage  /bin/bash
 docker 内开启防火墙功能
 docker run -ti --privileged=true sshd:2 /bin/bash
 
+
+修改默认的docker网桥
+
+ip link set dev docker0 down
+brctl delbr docker0
+cat /etc/docker/daemon.json
+{"bip":"10.0.42.1/16"}  ip/子网
+ systemctl restart docker 
