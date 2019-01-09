@@ -36,3 +36,14 @@
       centos:7： 在OPTIONS选项后加上 --insecure-registry=IP地址
                   vim /etc/sysconfig/docker
                       OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=IP地址'
+
+
+4.docker中显示中文
+      vim /etc/profile
+            # 然后将export LANG="C.UTF-8"加到最后一行
+            # 然后重新加载
+      source /etc/profile
+    在Dockerfile中  
+      FROM debian
+      # 加上下面这一行
+      ENV LANG C.UTF-8
