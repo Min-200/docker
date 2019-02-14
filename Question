@@ -47,3 +47,6 @@
       FROM debian
       # 加上下面这一行
       ENV LANG C.UTF-8
+
+5.centos7的镜像 在docker中通过systemctl 启动服务的时候总是报Failed to get D-Bus connection: Operation not permitted 这样的错误提示
+docker run --privileged  -ti -e "container=docker"    centos  /usr/sbin/init
