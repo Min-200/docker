@@ -50,3 +50,11 @@
 
 5.centos7的镜像 在docker中通过systemctl 启动服务的时候总是报Failed to get D-Bus connection: Operation not permitted 这样的错误提示
 docker run --privileged  -ti -e "container=docker"    centos  /usr/sbin/init
+
+
+6.docker volumes
+nexus-data 是数据卷容器
+docker run -ti -d -p 8081:8081 -v nexus-data:/nexus-data sonatype/nexus3
+
+迁移数据卷容器时,先用  docker volume create nexus 创建一个数据卷容器,再用 cp -rp nexus-data/* nexus/  将数据拷贝到另一个数据卷(使用-p保留权限)
+然后在启动
